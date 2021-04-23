@@ -6,7 +6,6 @@ import 'package:stack_trace/stack_trace.dart';
 import 'tracking_build_owner.dart';
 
 part 'build_tracker.freezed.dart';
-part 'build_tracker.g.dart';
 
 @freezed
 class BuildEntry with _$BuildEntry {
@@ -14,8 +13,6 @@ class BuildEntry with _$BuildEntry {
     required int timestamp,
     required String widget,
   }) = _BuildEntry;
-
-  factory BuildEntry.fromJson(Map<String, dynamic> json) = _BuildEntry.fromJson;
 }
 
 @freezed
@@ -25,8 +22,6 @@ class ScheduleBuildEntry with _$ScheduleBuildEntry {
     required String widget,
     required BuiltList<String> stack,
   }) = _ScheduleBuildEntry;
-
-  factory ScheduleBuildEntry.fromJson(Map<String, dynamic> json) = _ScheduleBuildEntry.fromJson;
 }
 
 @freezed
@@ -36,12 +31,12 @@ class BuildFrame with _$BuildFrame {
     required BuiltList<BuildEntry> built,
     required BuiltList<ScheduleBuildEntry> buildScheduled,
   }) = _BuildFrame;
-
-  factory BuildFrame.fromJson(Map<String, dynamic> json) = _BuildFrame.fromJson;
 }
 
 ///
 /// Track rebuilt widgets and build roots for each frame.
+///
+/// You need the [TrackingBuildOwnerWidgetsBindingMixin] on your [WidgetsBinding].
 ///
 class BuildTracker {
   BuildTracker({
@@ -52,7 +47,14 @@ class BuildTracker {
     this.enabled = enabled;
   }
 
+  ///
+  /// Print markdown-formatted stats after every frame.
+  ///
   bool printBuildFrame;
+
+  ///
+  /// Called after every frame with `BuildFrame` information collected during the frame build.
+  ///
   void Function(BuildFrame)? onBuildFrame;
 
   bool get enabled => _enabled;
@@ -66,7 +68,7 @@ class BuildTracker {
       assert(debugOnRebuildDirtyWidget == null, "`debugOnRebuildDirtyWidget` already in use ($debugOnRebuildDirtyWidget)");
       assert(debugOnScheduleBuildFor == null, "`debugOnScheduleBuildFor` already in use ($debugOnScheduleBuildFor)");
       assert(
-        TrackingBuildOwnerWidgetsFlutterBinding.ensureInitialized() is TrackingBuildOwnerWidgetsBindingMixin,
+        WidgetsBinding.instance is TrackingBuildOwnerWidgetsBindingMixin,
         "`TrackingBuildOwnerWidgetsBindingMixin` is required (${WidgetsBinding.instance})",
       );
     }
@@ -123,6 +125,9 @@ class BuildTracker {
     }
   }
 
+  ///
+  /// Print markdown-formatted stats.
+  ///
   void doPrintBuildFrame(BuildFrame frame) {
     debugPrint('# BuildTracker frame #${frame.number}');
     debugPrint('');

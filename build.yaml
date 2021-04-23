@@ -5,15 +5,3 @@ targets:
         generate_for:
           include:
             - lib/**.dart
-      json_serializable_immutable_collections:
-        generate_for:
-          include:
-            - lib/**.dart
-        options:
-          any_map: true
-          explicit_to_json: true
-      json_serializable:
-        generate_for:
-          include:
-          exclude:
-            - lib/**

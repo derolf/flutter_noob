@@ -12,10 +12,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-BuildEntry _$BuildEntryFromJson(Map<String, dynamic> json) {
-  return _BuildEntry.fromJson(json);
-}
-
 /// @nodoc
 class _$BuildEntryTearOff {
   const _$BuildEntryTearOff();
@@ -25,10 +21,6 @@ class _$BuildEntryTearOff {
       timestamp: timestamp,
       widget: widget,
     );
-  }
-
-  BuildEntry fromJson(Map<String, Object> json) {
-    return BuildEntry.fromJson(json);
   }
 }
 
@@ -40,7 +32,6 @@ mixin _$BuildEntry {
   int get timestamp => throw _privateConstructorUsedError;
   String get widget => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $BuildEntryCopyWith<BuildEntry> get copyWith =>
       throw _privateConstructorUsedError;
@@ -117,14 +108,10 @@ class __$BuildEntryCopyWithImpl<$Res> extends _$BuildEntryCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+
 class _$_BuildEntry implements _BuildEntry {
   _$_BuildEntry({required this.timestamp, required this.widget});
-
-  factory _$_BuildEntry.fromJson(Map<String, dynamic> json) =>
-      _$_$_BuildEntryFromJson(json);
 
   @override
   final int timestamp;
@@ -157,19 +144,11 @@ class _$_BuildEntry implements _BuildEntry {
   @override
   _$BuildEntryCopyWith<_BuildEntry> get copyWith =>
       __$BuildEntryCopyWithImpl<_BuildEntry>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_BuildEntryToJson(this);
-  }
 }
 
 abstract class _BuildEntry implements BuildEntry {
   factory _BuildEntry({required int timestamp, required String widget}) =
       _$_BuildEntry;
-
-  factory _BuildEntry.fromJson(Map<String, dynamic> json) =
-      _$_BuildEntry.fromJson;
 
   @override
   int get timestamp => throw _privateConstructorUsedError;
@@ -179,10 +158,6 @@ abstract class _BuildEntry implements BuildEntry {
   @JsonKey(ignore: true)
   _$BuildEntryCopyWith<_BuildEntry> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-ScheduleBuildEntry _$ScheduleBuildEntryFromJson(Map<String, dynamic> json) {
-  return _ScheduleBuildEntry.fromJson(json);
 }
 
 /// @nodoc
@@ -199,10 +174,6 @@ class _$ScheduleBuildEntryTearOff {
       stack: stack,
     );
   }
-
-  ScheduleBuildEntry fromJson(Map<String, Object> json) {
-    return ScheduleBuildEntry.fromJson(json);
-  }
 }
 
 /// @nodoc
@@ -214,7 +185,6 @@ mixin _$ScheduleBuildEntry {
   String get widget => throw _privateConstructorUsedError;
   BuiltList<String> get stack => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ScheduleBuildEntryCopyWith<ScheduleBuildEntry> get copyWith =>
       throw _privateConstructorUsedError;
@@ -304,15 +274,11 @@ class __$ScheduleBuildEntryCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+
 class _$_ScheduleBuildEntry implements _ScheduleBuildEntry {
   _$_ScheduleBuildEntry(
       {required this.timestamp, required this.widget, required this.stack});
-
-  factory _$_ScheduleBuildEntry.fromJson(Map<String, dynamic> json) =>
-      _$_$_ScheduleBuildEntryFromJson(json);
 
   @override
   final int timestamp;
@@ -350,11 +316,6 @@ class _$_ScheduleBuildEntry implements _ScheduleBuildEntry {
   @override
   _$ScheduleBuildEntryCopyWith<_ScheduleBuildEntry> get copyWith =>
       __$ScheduleBuildEntryCopyWithImpl<_ScheduleBuildEntry>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_ScheduleBuildEntryToJson(this);
-  }
 }
 
 abstract class _ScheduleBuildEntry implements ScheduleBuildEntry {
@@ -362,9 +323,6 @@ abstract class _ScheduleBuildEntry implements ScheduleBuildEntry {
       {required int timestamp,
       required String widget,
       required BuiltList<String> stack}) = _$_ScheduleBuildEntry;
-
-  factory _ScheduleBuildEntry.fromJson(Map<String, dynamic> json) =
-      _$_ScheduleBuildEntry.fromJson;
 
   @override
   int get timestamp => throw _privateConstructorUsedError;
@@ -376,10 +334,6 @@ abstract class _ScheduleBuildEntry implements ScheduleBuildEntry {
   @JsonKey(ignore: true)
   _$ScheduleBuildEntryCopyWith<_ScheduleBuildEntry> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-BuildFrame _$BuildFrameFromJson(Map<String, dynamic> json) {
-  return _BuildFrame.fromJson(json);
 }
 
 /// @nodoc
@@ -396,10 +350,6 @@ class _$BuildFrameTearOff {
       buildScheduled: buildScheduled,
     );
   }
-
-  BuildFrame fromJson(Map<String, Object> json) {
-    return BuildFrame.fromJson(json);
-  }
 }
 
 /// @nodoc
@@ -412,7 +362,6 @@ mixin _$BuildFrame {
   BuiltList<ScheduleBuildEntry> get buildScheduled =>
       throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $BuildFrameCopyWith<BuildFrame> get copyWith =>
       throw _privateConstructorUsedError;
@@ -505,17 +454,13 @@ class __$BuildFrameCopyWithImpl<$Res> extends _$BuildFrameCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+
 class _$_BuildFrame implements _BuildFrame {
   _$_BuildFrame(
       {required this.number,
       required this.built,
       required this.buildScheduled});
-
-  factory _$_BuildFrame.fromJson(Map<String, dynamic> json) =>
-      _$_$_BuildFrameFromJson(json);
 
   @override
   final int number;
@@ -553,11 +498,6 @@ class _$_BuildFrame implements _BuildFrame {
   @override
   _$BuildFrameCopyWith<_BuildFrame> get copyWith =>
       __$BuildFrameCopyWithImpl<_BuildFrame>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_BuildFrameToJson(this);
-  }
 }
 
 abstract class _BuildFrame implements BuildFrame {
@@ -565,9 +505,6 @@ abstract class _BuildFrame implements BuildFrame {
       {required int number,
       required BuiltList<BuildEntry> built,
       required BuiltList<ScheduleBuildEntry> buildScheduled}) = _$_BuildFrame;
-
-  factory _BuildFrame.fromJson(Map<String, dynamic> json) =
-      _$_BuildFrame.fromJson;
 
   @override
   int get number => throw _privateConstructorUsedError;
