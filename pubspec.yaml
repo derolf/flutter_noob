@@ -1,6 +1,6 @@
 name: debug_tools
 description: A few handy tools to debug Flutter apps. Contains `BuildTracker` that allows to track widget rebuilds and what caused them to rebuild.
-version: 0.0.2+1
+version: 0.0.2+2
 homepage: https://github.com/derolf/flutter_debug_tools
 
 environment:

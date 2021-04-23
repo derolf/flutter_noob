@@ -16,7 +16,8 @@ void main() {
     await tester.pumpWidget(
       ValueListenableBuilder<String>(
         valueListenable: text,
-        builder: (_, value, child) => Directionality(textDirection: TextDirection.ltr, child: Text(value)),
+        builder: (_, value, child) => Directionality(
+            textDirection: TextDirection.ltr, child: Text(value)),
       ),
     );
 

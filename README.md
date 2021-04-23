@@ -4,6 +4,14 @@ A few handy tools to debug Flutter apps.
 
 ## BuildTracker
 
+```Dart
+void main() {
+  TrackingBuildOwnerWidgetsFlutterBinding.ensureInitialized();
+  BuildTracker(printBuildFrameIncludeBuilt: false); // disable built widgets to reduce the noise
+  runApp(...)
+}
+```
+
 A lot of people have spent hours in trying to figure out why Flutter constantly rebuilds dozens of widgts in their app. To the rescue, `BuildTracker` allows to track which widgets are rebuilt during every frame and -- even more important -- what caused them to rebuild.
 
 Flutter's rendering pipeline is usually idle until some widget in the widget tree is marked as dirty, e.g. by calling `setState` on the `State` of a `StatefulWidget`. In that case, Flutter will schedule the widget to be build during the next frame. However, before the next frame is actually being built, there might be many more widgets being marked dirty. All these widgets we call the "build roots" of the succeeding frame.

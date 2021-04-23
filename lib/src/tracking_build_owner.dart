@@ -20,7 +20,9 @@ mixin TrackingBuildOwnerWidgetsBindingMixin on WidgetsBinding {
       _buildOwner ??
       (super.buildOwner == null
           ? null
-          : _buildOwner = TrackingBuildOwner(onBuildScheduled: super.buildOwner!.onBuildScheduled, focusManager: super.buildOwner!.focusManager));
+          : _buildOwner = TrackingBuildOwner(
+              onBuildScheduled: super.buildOwner!.onBuildScheduled,
+              focusManager: super.buildOwner!.focusManager));
 
   TrackingBuildOwner? _buildOwner;
 }
@@ -28,9 +30,12 @@ mixin TrackingBuildOwnerWidgetsBindingMixin on WidgetsBinding {
 ///
 /// [WidgetsFlutterBinding] with [TrackingBuildOwnerWidgetsBindingMixin]
 ///
-class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding with TrackingBuildOwnerWidgetsBindingMixin {
+class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding
+    with TrackingBuildOwnerWidgetsBindingMixin {
   static WidgetsBinding ensureInitialized() {
-    if (WidgetsBinding.instance == null) TrackingBuildOwnerWidgetsFlutterBinding();
+    if (WidgetsBinding.instance == null) {
+      TrackingBuildOwnerWidgetsFlutterBinding();
+    }
     return WidgetsBinding.instance!;
   }
 }
@@ -46,7 +51,21 @@ class TrackingBuildOwner extends BuildOwner {
 
   @override
   void scheduleBuildFor(Element element) {
-    debugOnScheduleBuildFor?.call(element);
+    if (_isReassembling == 0) {
+      debugOnScheduleBuildFor?.call(element);
+    }
     super.scheduleBuildFor(element);
   }
+
+  @override
+  void reassemble(Element root) {
+    _isReassembling++;
+    try {
+      super.reassemble(root);
+    } finally {
+      _isReassembling--;
+    }
+  }
+
+  var _isReassembling = 0;
 }
