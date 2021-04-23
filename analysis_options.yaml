@@ -1,0 +1,19 @@
+include: package:lint/analysis_options_package.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  errors:
+    import_of_legacy_library_into_null_safe: ignore
+  exclude:
+    - lib/**.g.dart
+
+linter:
+  rules:
+    unawaited_futures: true
+    avoid_classes_with_only_static_members: false
+    type_annotate_public_apis: false
+    avoid_function_literals_in_foreach_calls: false
+    avoid_positional_boolean_parameters: false
+    parameter_assignments: false
