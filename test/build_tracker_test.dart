@@ -13,21 +13,28 @@ void main() {
     final text = ValueNotifier('');
 
     debugPrint('# `tester.pumpWidget(...)`');
+    debugPrint('');
     await tester.pumpWidget(
       ValueListenableBuilder<String>(
         valueListenable: text,
         builder: (_, value, child) => Directionality(
-            textDirection: TextDirection.ltr, child: Text(value)),
+          textDirection: TextDirection.ltr,
+          child: Text(value),
+        ),
       ),
     );
 
-    debugPrint("# `text.value = '42'`");
-    text.value = '42';
-
-    debugPrint('# `test.pump`');
-    await tester.pump();
+    debugPrint("# Looping `text.value`");
+    debugPrint('');
+    for (var i = 0; i < 10; i++) {
+      text.value = '$i';
+      await tester.pump();
+    }
 
     debugPrint('# test end');
+    debugPrint('');
     tracker.enabled = false;
+
+    tracker.printTopScheduleBuildForStacks();
   });
 }

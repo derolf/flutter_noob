@@ -14,3 +14,8 @@ Expose `BuildTracker`.
 
 - Add options to reduce output.
 - Show each stack trace only once.
+
+## 0.0.3
+
+- Show each stack trace only once (also in first frame).
+- Print top stack traces leading to rebuilds.
