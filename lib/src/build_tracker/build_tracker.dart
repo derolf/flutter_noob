@@ -5,6 +5,9 @@ import 'package:stack_trace/stack_trace.dart';
 
 import 'tracking_build_owner.dart';
 
+export 'test_tracking_build_owner.dart' if (dart.library.html) '_empty.dart';
+export 'tracking_build_owner.dart';
+
 part 'build_tracker.freezed.dart';
 
 @freezed
@@ -38,6 +41,8 @@ class BuildFrame with _$BuildFrame {
 ///
 /// You need the [TrackingBuildOwnerWidgetsBindingMixin] on your [WidgetsBinding].
 ///
+/// See [#addIgnoredWidget] to ignore a [Widget] type.
+///
 class BuildTracker {
   BuildTracker({
     this.onBuildFrame,
@@ -68,6 +73,11 @@ class BuildTracker {
   /// Called after every frame with `BuildFrame` information collected during the frame build.
   ///
   void Function(BuildFrame)? onBuildFrame;
+
+  ///
+  /// Any [Widget] path that includes a widget of type `T` will be ignored.
+  ///
+  void addIgnoredWidget<T extends Widget>() => _ignoredWidgets.add(T);
 
   bool get enabled => _enabled;
 
@@ -102,12 +112,19 @@ class BuildTracker {
   }
 
   void _onDebugOnRebuildDirtyWidget(Element e, bool builtOnce) {
+    if (_isIgnored(e)) {
+      return;
+    }
     _buildList.add(RebuildDirtyWidget(
         timestamp: DateTime.now().millisecondsSinceEpoch,
         widget: e.debugGetCreatorChain(10)));
   }
 
   void _onDebugOnScheduleBuildFor(Element e) {
+    if (_isIgnored(e)) {
+      return;
+    }
+
     var chain = Chain.current();
     final setStateIndex = chain.traces.first.frames.lastIndexWhere(
       (_) => {
@@ -265,10 +282,26 @@ class BuildTracker {
     _printedStacksCounts.clear();
   }
 
+  bool _isIgnored(Element e) {
+    if (_ignoredWidgets.contains(e.runtimeType)) {
+      return true;
+    }
+    var ignored = false;
+    e.visitAncestorElements((element) {
+      if (_ignoredWidgets.contains(e.runtimeType)) {
+        ignored = true;
+      }
+      return !ignored;
+    });
+    return ignored;
+  }
+
   var _enabled = false;
   var _number = 1;
 
   var _frameCallbackScheduled = false;
+
+  final _ignoredWidgets = <Type>{};
 
   final _buildList = <RebuildDirtyWidget>[];
   final _buildScheduleList = <ScheduleBuildFor>[];

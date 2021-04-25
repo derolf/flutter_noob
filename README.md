@@ -1,8 +1,12 @@
-# debug_tools
+# noob
 
-A few handy tools to debug Flutter apps.
+A few handy tools for Flutter apps.
 
-## BuildTracker
+- [BuildTracker](#buildtracker)
+- [OverlayPointerIndicator](#pointerindicator)
+- [Hooks](#hooks)
+
+# BuildTracker
 
 ```Dart
 void main() {
@@ -131,3 +135,18 @@ Stack trace #1beada3:
 * main.<fn>                                test/build_tracker_test.dart 17:18
 ...
 ```
+
+# OverlayPointerIndicator
+
+```Dart
+OverlayPointerIndicator(child: ...)
+```
+
+The `OverlayPointerIndicator` shows positions of `PointerEvent`s and hence allows to record the screen including "fingers".
+
+# Hooks
+
+Some handy hooks:
+
+- `useRebuild`: Manually trigger rebuilding of a `HookWidet`/`HookBuilder`
+- `useVariable`: Lightweight hook to create a variable (mutable value) that doesn't trigger rebuilds when it's changed
