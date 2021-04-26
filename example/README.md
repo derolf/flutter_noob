@@ -1,6 +1,12 @@
-# Example app for debug_tools
+# Example app for noob
 
-To run the example in Chrome:
+Create platforms:
+
+```Bash
+flutter create .
+```
+
+Run:
 
 ```Bash
 flutter run

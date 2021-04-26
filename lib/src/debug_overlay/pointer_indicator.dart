@@ -11,14 +11,38 @@ class PointerIndicator extends StatelessWidget {
   const PointerIndicator({
     Key? key,
     this.enabled = true,
-    this.indicatorSize = 20.0,
+    this.minIndicatorSize = 10.0,
+    this.normalIndicatorSize = 20.0,
     this.indicatorColor = const Color.fromRGBO(0, 0, 255, 0.2),
     this.child,
   }) : super(key: key);
 
+  ///
+  /// Set to `false` to disable the indicators.
+  ///
   final bool enabled;
-  final double indicatorSize;
+
+  ///
+  /// Size of indicator at pressure `0.0`
+  ///
+  /// [normalIndicatorSize]
+  final double minIndicatorSize;
+
+  ///
+  /// Size of indicator at pressure `1.0`
+  ///
+  /// The actual indicator size is computed as: `minIndicatorSize + (normalIndicatorSize - minIndicatorSize) * pressure`
+  ///
+  final double normalIndicatorSize;
+
+  ///
+  /// Color of the indicator.
+  ///
   final Color indicatorColor;
+
+  ///
+  /// Child `Widget`.
+  ///
   final Widget? child;
 
   @override
@@ -36,7 +60,9 @@ class PointerIndicator extends StatelessWidget {
                     : IgnorePointer(
                         child: Stack(
                           children: pointers.values.map((_) {
-                            final size = indicatorSize * _.pressure;
+                            final size = minIndicatorSize +
+                                (normalIndicatorSize - minIndicatorSize) *
+                                    _.pressure;
                             return Positioned(
                               left: _.position.dx - size / 2 - pos.dx,
                               top: _.position.dy - size / 2 - pos.dy,

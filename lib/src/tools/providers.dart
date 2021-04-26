@@ -55,7 +55,8 @@ class GlobalPositionStateNotifier extends StateNotifier<Rect?> {
   void _callback(Duration _) {
     if (mounted) {
       final renderBox = context.findRenderObject() as RenderBox?;
-      final rect = renderBox?.let((_) => _.localToGlobal(Offset.zero) & _.size);
+      final rect = renderBox?.let(
+          (_) => _.attached ? _.localToGlobal(Offset.zero) & _.size : null);
       if (state != rect) {
         state = rect;
       }
@@ -67,7 +68,8 @@ class GlobalPositionStateNotifier extends StateNotifier<Rect?> {
 ///
 /// A provider to track the global position of a [BuildContext]'s [RenderBox].
 ///
-/// Usage:
+/// Example:
+///
 /// ```dart
 /// Consumer(
 ///   builder: (context, watch, _) {

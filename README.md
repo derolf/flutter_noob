@@ -2,10 +2,59 @@
 
 A few handy tools for Flutter apps.
 
-- [BuildTracker](#buildtracker)
-- [PointerIndicator](#pointerindicator)
+- [UriRouter](#urirouter)
 - [Hooks](#hooks)
 - [Providers](#providers)
+- [PointerIndicator](#pointerindicator)
+- [BuildTracker](#buildtracker)
+
+# UriRouter
+
+Dead simple `Uri`-based page router.
+
+```Dart
+class BooksPage extends StatelessWidget {
+  static final route = UriRoute(
+    path: '/books/:id',
+    pageBuilder: (context, params) => BooksPage(id: params.pathParams['id']!),
+  );
+
+  static String path(String id) => route.build(pathParams: <String, String>{'id': id});
+...
+}
+
+final router = UriRouter(routes: [
+  BooksPage.route,
+]);
+
+runApp(MaterialApp(onGenerateRoute: router.generateRoute));
+
+Navigator.pushNamed(context, BooksPage.path('42'));
+```
+
+# Hooks
+
+Some handy hooks:
+
+- `useDisposable`: Manage objects that need to be disposed
+- `useRebuild`: Manually trigger rebuilding of a `HookWidet`/`HookBuilder`
+- `useVariable`: Lightweight hook to create a variable (mutable value) that doesn't trigger rebuilds when it's changed
+- `useListener`/`useValueListener`: Attach a callback to `Listenable`/`ValueListenable` without triggering rebuilds when they get notified
+
+# Providers
+
+Some handy providers:
+
+- `lastPointerEventProvider`: Track the last`[PointerEvent`s of active pointers
+- `globalPositionProvider`: Track the global position of a `BuildContext`s `RenderBox`
+
+# PointerIndicator
+
+```Dart
+PointerIndicator(child: ...)
+```
+
+The `PointerIndicator` shows positions of `PointerEvent`s and hence allows to record the screen including "fingers".
 
 # BuildTracker
 
@@ -136,27 +185,3 @@ Stack trace #1beada3:
 * main.<fn>                                test/build_tracker_test.dart 17:18
 ...
 ```
-
-# PointerIndicator
-
-```Dart
-PointerIndicator(child: ...)
-```
-
-The `PointerIndicator` shows positions of `PointerEvent`s and hence allows to record the screen including "fingers".
-
-# Hooks
-
-Some handy hooks:
-
-- `useDisposable`: Manage objects that need to be disposed
-- `useRebuild`: Manually trigger rebuilding of a `HookWidet`/`HookBuilder`
-- `useVariable`: Lightweight hook to create a variable (mutable value) that doesn't trigger rebuilds when it's changed
-- `useListener`/`useValueListener`: Attach a callback to `Listenable`/`ValueListenable` without triggering rebuilds when they get notified
-
-# Providers
-
-Some handy providers:
-
-- `lastPointerEventProvider`: Track the last`[PointerEvent`s of active pointers
-- `globalPositionProvider`: Track the global position of a `BuildContext`s `RenderBox`

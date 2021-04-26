@@ -4,3 +4,7 @@ First release:
 
 - `BuildTracker`
 - `DebugOverlay`
+
+## 0.0.2
+
+- `UriRouter`

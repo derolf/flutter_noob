@@ -1,6 +1,6 @@
 name: noob
-description: A few handy Flutter tools. Contains `BuildTracker` that allows to track widget rebuilds and what caused them to rebuild.
-version: 0.0.1
+description: A few handy Flutter tools, dead simple `UriRouter` for `Uri`-based navigator or `BuildTracker`  to track widget rebuilds and what caused them to rebuild.
+version: 0.0.2
 homepage: https://github.com/derolf/flutter_debug_tools
 
 environment:
