@@ -41,7 +41,7 @@ class BuildFrame with _$BuildFrame {
 ///
 /// You need the [TrackingBuildOwnerWidgetsBindingMixin] on your [WidgetsBinding].
 ///
-/// See [#addIgnoredWidget] to ignore a [Widget] type.
+/// See [addIgnored] to ignore certain [Widget]s.
 ///
 class BuildTracker {
   BuildTracker({
@@ -75,9 +75,21 @@ class BuildTracker {
   void Function(BuildFrame)? onBuildFrame;
 
   ///
-  /// Any [Widget] path that includes a widget of type `T` will be ignored.
+  /// Any [Widget] path that starts with `pathStartsWith` will be ignored.
   ///
-  void addIgnoredWidget<T extends Widget>() => _ignoredWidgets.add(T);
+  /// ```dart
+  /// addIgnored([
+  ///   '_FocusMarker',
+  ///   'FocusScope',
+  ///   'Focus',
+  ///   '_MaterialInterior',
+  ///   'RawMaterialButton',
+  ///   'UncontrolledProviderScope ← ProviderScope',
+  ///   "Consumer-[<'PositionIndicator'>]",
+  /// ]);
+  ///```
+  void addIgnored(List<String> pathStartsWithList) =>
+      pathStartsWithList.forEach((_) => _ignoredWidgets.add('$_ '));
 
   bool get enabled => _enabled;
 
@@ -112,7 +124,7 @@ class BuildTracker {
   }
 
   void _onDebugOnRebuildDirtyWidget(Element e, bool builtOnce) {
-    if (_isIgnored(e)) {
+    if (_isIgnored(e.debugGetCreatorChain(10))) {
       return;
     }
     _buildList.add(RebuildDirtyWidget(
@@ -121,17 +133,18 @@ class BuildTracker {
   }
 
   void _onDebugOnScheduleBuildFor(Element e) {
-    if (_isIgnored(e)) {
+    if (_isIgnored(e.debugGetCreatorChain(10))) {
       return;
     }
-
     var chain = Chain.current();
     final setStateIndex = chain.traces.first.frames.lastIndexWhere(
-      (_) => {
-        'State.setState',
-        'Element.markNeedsBuild',
-        'HookState.setState',
-      }.contains(_.member),
+      (_) =>
+          {'package:flutter/', 'packages/flutter/'}
+              .any((p) => _.location.startsWith(p)) &&
+          {
+            'setState',
+            'markNeedsBuild',
+          }.any((m) => _.member?.endsWith(m) ?? false),
     );
     if (setStateIndex > 0) {
       chain = Chain.current(setStateIndex);
@@ -143,7 +156,8 @@ class BuildTracker {
         stack: chain.terse.traces
             .expand((t) => t.frames)
             .map(
-              (f) => '${f.member},${f.location}',
+              (f) =>
+                  '${f.member},${f.location.replaceFirst(RegExp('^packages/'), 'package:')}',
             )
             .toBuiltList(),
       ),
@@ -282,26 +296,15 @@ class BuildTracker {
     _printedStacksCounts.clear();
   }
 
-  bool _isIgnored(Element e) {
-    if (_ignoredWidgets.contains(e.runtimeType)) {
-      return true;
-    }
-    var ignored = false;
-    e.visitAncestorElements((element) {
-      if (_ignoredWidgets.contains(e.runtimeType)) {
-        ignored = true;
-      }
-      return !ignored;
-    });
-    return ignored;
-  }
+  bool _isIgnored(String path) =>
+      _ignoredWidgets.any((_) => path.startsWith(_));
 
   var _enabled = false;
   var _number = 1;
 
   var _frameCallbackScheduled = false;
 
-  final _ignoredWidgets = <Type>{};
+  final _ignoredWidgets = <String>[];
 
   final _buildList = <RebuildDirtyWidget>[];
   final _buildScheduleList = <ScheduleBuildFor>[];

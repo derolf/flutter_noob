@@ -6,7 +6,8 @@ import 'package:noob/noob.dart';
 ///
 /// Track the last [PointerEvent] of active pointers.
 ///
-class LastPointerEventProviderStateNotifier extends StateNotifier<BuiltMap<int, PointerEvent>> {
+class LastPointerEventProviderStateNotifier
+    extends StateNotifier<BuiltMap<int, PointerEvent>> {
   LastPointerEventProviderStateNotifier() : super(BuiltMap()) {
     WidgetsBinding.instance!.pointerRouter.addGlobalRoute(_handler);
   }
@@ -36,7 +37,8 @@ class LastPointerEventProviderStateNotifier extends StateNotifier<BuiltMap<int, 
 ///
 /// A provider to track the last [PointerEvent]s of active pointers.
 ///
-final lastPointerEventProvider = StateNotifierProvider.autoDispose<LastPointerEventProviderStateNotifier, BuiltMap<int, PointerEvent>>(
+final lastPointerEventProvider = StateNotifierProvider.autoDispose<
+    LastPointerEventProviderStateNotifier, BuiltMap<int, PointerEvent>>(
   (ref) => LastPointerEventProviderStateNotifier(),
 );
 
@@ -74,6 +76,7 @@ class GlobalPositionStateNotifier extends StateNotifier<Rect?> {
 ///   },
 /// );
 /// ```
-final globalPositionProvider = StateNotifierProvider.autoDispose.family<GlobalPositionStateNotifier, Rect?, BuildContext>(
+final globalPositionProvider = StateNotifierProvider.autoDispose
+    .family<GlobalPositionStateNotifier, Rect?, BuildContext>(
   (ref, context) => GlobalPositionStateNotifier(context),
 );

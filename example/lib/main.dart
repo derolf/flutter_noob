@@ -13,10 +13,19 @@ void main() {
   final tracker = BuildTracker(
     printBuildFrameIncludeRebuildDirtyWidget: false,
   ) //
-    ..addIgnoredWidget<PointerIndicator>();
+    ..addIgnored([
+      '_FocusMarker',
+      'FocusScope',
+      'Focus',
+      '_MaterialInterior',
+      'RawMaterialButton',
+      'UncontrolledProviderScope ← ProviderScope',
+      "Consumer-[<'PositionIndicator'>]",
+    ]);
 
   // print top 10 stacks leading to rebuilds every 10 seconds
-  Timer.periodic(const Duration(seconds: 10), (_) => tracker.printTopScheduleBuildForStacks());
+  Timer.periodic(const Duration(seconds: 10),
+      (_) => tracker.printTopScheduleBuildForStacks());
 
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -53,7 +62,7 @@ class MyHomePage extends HookWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            OverlayPointerIndicator(
+            PointerIndicator(
               child: Container(
                 alignment: Alignment.center,
                 color: Colors.amber,

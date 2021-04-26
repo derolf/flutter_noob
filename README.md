@@ -3,8 +3,9 @@
 A few handy tools for Flutter apps.
 
 - [BuildTracker](#buildtracker)
-- [OverlayPointerIndicator](#pointerindicator)
+- [PointerIndicator](#pointerindicator)
 - [Hooks](#hooks)
+- [Providers](#providers)
 
 # BuildTracker
 
@@ -136,17 +137,26 @@ Stack trace #1beada3:
 ...
 ```
 
-# OverlayPointerIndicator
+# PointerIndicator
 
 ```Dart
-OverlayPointerIndicator(child: ...)
+PointerIndicator(child: ...)
 ```
 
-The `OverlayPointerIndicator` shows positions of `PointerEvent`s and hence allows to record the screen including "fingers".
+The `PointerIndicator` shows positions of `PointerEvent`s and hence allows to record the screen including "fingers".
 
 # Hooks
 
 Some handy hooks:
 
+- `useDisposable`: Manage objects that need to be disposed
 - `useRebuild`: Manually trigger rebuilding of a `HookWidet`/`HookBuilder`
 - `useVariable`: Lightweight hook to create a variable (mutable value) that doesn't trigger rebuilds when it's changed
+- `useListener`/`useValueListener`: Attach a callback to `Listenable`/`ValueListenable` without triggering rebuilds when they get notified
+
+# Providers
+
+Some handy providers:
+
+- `lastPointerEventProvider`: Track the last`[PointerEvent`s of active pointers
+- `globalPositionProvider`: Track the global position of a `BuildContext`s `RenderBox`
