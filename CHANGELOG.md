@@ -8,3 +8,9 @@ First release:
 ## 0.0.2
 
 - `UriRouter`
+
+## 0.0.3
+
+- `PeriodicListenable`
+- `useLastValidAsyncData`/`useAsyncValue`
+- `EmptyBuiltList`/`EmptyBuiltMap`

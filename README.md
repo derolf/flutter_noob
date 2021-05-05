@@ -7,6 +7,7 @@ A few handy tools for Flutter apps.
 - [Providers](#providers)
 - [PointerIndicator](#pointerindicator)
 - [BuildTracker](#buildtracker)
+- [PeriodicListenable](#periodiclistenable)
 
 # UriRouter
 
@@ -40,6 +41,8 @@ Some handy hooks:
 - `useRebuild`: Manually trigger rebuilding of a `HookWidet`/`HookBuilder`
 - `useVariable`: Lightweight hook to create a variable (mutable value) that doesn't trigger rebuilds when it's changed
 - `useListener`/`useValueListener`: Attach a callback to `Listenable`/`ValueListenable` without triggering rebuilds when they get notified
+- `useAsyncValue`: Turn `Future` into `AsyncValue`
+- `useLastValidAsyncData`: Remember most recent valid `AsyncData`
 
 # Providers
 
@@ -185,3 +188,13 @@ Stack trace #1beada3:
 * main.<fn>                                test/build_tracker_test.dart 17:18
 ...
 ```
+
+# PeriodicListenable
+
+```
+    final timer30 = useDisposable<PeriodicListenable>(() => PeriodicListenable(const Duration(seconds: 30)), (_) => _.dispose());
+
+    useListener(timer60, callInitially: false, callback: () => context.refresh(daaProvider));
+```
+
+`PeriodicListenable` can be used to create a `Listenable` that notifies its listeners periodically.

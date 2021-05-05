@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 ///
 /// Calling the function causes the enclosing [HookWidet] or [HookBuilder] to rebuild.
@@ -156,4 +159,35 @@ class _DisposableHookState<T extends Object>
 
   @override
   void dispose() => hook.dispose(_value);
+}
+
+///
+/// Turn the Future returned by `future`  into an `AsyncValue`.
+///
+/// The returned `future` is memoized and re-evaluated whenever `keys` change.
+///
+AsyncValue<T> useAsyncValue<T>(
+  Future<T> Function() future, [
+  List<Object?> keys = const <Object>[],
+]) =>
+    useFuture(
+      useMemoized(() => AsyncValue.guard(future), keys),
+      initialData: AsyncValue<T>.loading(),
+    ).data!;
+
+///
+/// Remembers and returns the most recent valid `AsyncData` with the following logic:
+///
+/// - [AsyncData<T>] is remembered
+/// - [AsyncError] resets to `null`.
+/// - [AsyncLoading] is ignored
+///
+AsyncData<T>? useLastValidAsyncData<T>(AsyncValue<T> value) {
+  final state = useState<AsyncData<T>?>(null);
+  if (value is AsyncData<T>) {
+    state.value = value;
+  } else if (value is AsyncError) {
+    state.value = null;
+  }
+  return state.value;
 }

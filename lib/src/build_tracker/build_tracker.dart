@@ -90,7 +90,8 @@ class BuildTracker {
   ///   "Consumer-[<'PositionIndicator'>]",
   /// ]);
   ///```
-  void addIgnored(List<String> pathStartsWithList) => pathStartsWithList.forEach((_) => _ignoredWidgets.add('$_ '));
+  void addIgnored(List<String> pathStartsWithList) =>
+      pathStartsWithList.forEach((_) => _ignoredWidgets.add('$_ '));
 
   bool get enabled => _enabled;
 
@@ -128,7 +129,9 @@ class BuildTracker {
     if (_isIgnored(e.debugGetCreatorChain(10))) {
       return;
     }
-    _buildList.add(RebuildDirtyWidget(timestamp: DateTime.now().millisecondsSinceEpoch, widget: e.debugGetCreatorChain(10)));
+    _buildList.add(RebuildDirtyWidget(
+        timestamp: DateTime.now().millisecondsSinceEpoch,
+        widget: e.debugGetCreatorChain(10)));
   }
 
   void _onDebugOnScheduleBuildFor(Element e) {
@@ -138,7 +141,8 @@ class BuildTracker {
     var chain = Chain.current();
     final setStateIndex = chain.traces.first.frames.lastIndexWhere(
       (_) =>
-          {'package:flutter/', 'packages/flutter/'}.any((p) => _.location.startsWith(p)) &&
+          {'package:flutter/', 'packages/flutter/'}
+              .any((p) => _.location.startsWith(p)) &&
           {
             'setState',
             'markNeedsBuild',
@@ -154,7 +158,8 @@ class BuildTracker {
         stack: chain.terse.traces
             .expand((t) => t.frames)
             .map(
-              (f) => '${f.member},${f.location.replaceFirst(RegExp('^packages/'), 'package:')}',
+              (f) =>
+                  '${f.member},${f.location.replaceFirst(RegExp('^packages/'), 'package:')}',
             )
             .toBuiltList(),
       ),
@@ -177,7 +182,8 @@ class BuildTracker {
 
     for (final e in frame.schedueBuildFors) {
       final stack = e.stack;
-      _scheduleBuildForStacksCounter[stack] = (_scheduleBuildForStacksCounter[stack] ?? 0) + 1;
+      _scheduleBuildForStacksCounter[stack] =
+          (_scheduleBuildForStacksCounter[stack] ?? 0) + 1;
     }
 
     if (printBuildFrame) {
@@ -194,8 +200,10 @@ class BuildTracker {
   /// Print markdown-formatted stats.
   ///
   void doPrintBuildFrame(BuildFrame frame) {
-    final hasOutput = (printBuildFrameIncludeScheduleBuildFor && frame.schedueBuildFors.isNotEmpty) ||
-        (printBuildFrameIncludeRebuildDirtyWidget && frame.rebuildDirtyWidgets.isNotEmpty);
+    final hasOutput = (printBuildFrameIncludeScheduleBuildFor &&
+            frame.schedueBuildFors.isNotEmpty) ||
+        (printBuildFrameIncludeRebuildDirtyWidget &&
+            frame.rebuildDirtyWidgets.isNotEmpty);
 
     if (!hasOutput) {
       return;
@@ -204,7 +212,8 @@ class BuildTracker {
     debugPrint('# BuildTracker frame #${frame.number}');
     debugPrint('');
 
-    if (printBuildFrameIncludeRebuildDirtyWidget && frame.rebuildDirtyWidgets.isNotEmpty) {
+    if (printBuildFrameIncludeRebuildDirtyWidget &&
+        frame.rebuildDirtyWidgets.isNotEmpty) {
       debugPrint('## Widgets that were built');
       debugPrint('');
       for (final e in frame.rebuildDirtyWidgets) {
@@ -213,7 +222,8 @@ class BuildTracker {
       debugPrint('');
     }
 
-    if (printBuildFrameIncludeScheduleBuildFor && frame.schedueBuildFors.isNotEmpty) {
+    if (printBuildFrameIncludeScheduleBuildFor &&
+        frame.schedueBuildFors.isNotEmpty) {
       debugPrint('## Widgets that were marked dirty (build roots)');
       debugPrint('');
       for (final e in frame.schedueBuildFors) {
@@ -225,7 +235,8 @@ class BuildTracker {
         debugPrint('### ${e.widget}:');
         debugPrint('');
         if (printedIn != null) {
-          debugPrint('Stack trace #$stackHash observed in frame #$printedIn for the first time');
+          debugPrint(
+              'Stack trace #$stackHash observed in frame #$printedIn for the first time');
         } else {
           _printedStacksFirstFrame[stack] = frame.number;
 
@@ -239,7 +250,8 @@ class BuildTracker {
               'package:flutter/',
               'package:flutter_test/',
             }.any((_) => location.startsWith(_));
-            debugPrint('${isCore ? ' ' : '*'} ${member.padRight(40)} $location');
+            debugPrint(
+                '${isCore ? ' ' : '*'} ${member.padRight(40)} $location');
           }
           debugPrint('```');
         }
@@ -300,7 +312,8 @@ class BuildTracker {
     _scheduleBuildForStacksCounter.clear();
   }
 
-  bool _isIgnored(String path) => _ignoredWidgets.any((_) => path.startsWith(_));
+  bool _isIgnored(String path) =>
+      _ignoredWidgets.any((_) => path.startsWith(_));
 
   var _enabled = false;
   var _number = 1;
