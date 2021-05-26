@@ -14,3 +14,7 @@ First release:
 - `PeriodicListenable`
 - `useLastValidAsyncData`/`useAsyncValue`
 - `EmptyBuiltList`/`EmptyBuiltMap`
+
+## 0.0.4
+
+- Minor addition to `UriRouter`

@@ -18,14 +18,6 @@ typedef RouteBuilder = Route<dynamic> Function(
 ///
 /// See [UriRoute].
 ///
-typedef RouteNameBuilder = String Function({
-  Map<String, String> queryParams,
-  Map<String, String> pathParams,
-});
-
-///
-/// See [UriRoute].
-///
 @freezed
 class PageParams with _$PageParams {
   factory PageParams({
@@ -70,6 +62,7 @@ class PageParams with _$PageParams {
 class UriRouter {
   UriRouter({
     this.defaultRouteBuilder = materialPageRouteBuilder,
+    this.defaultRoute,
     List<UriRoute> routes = const [],
   }) {
     _routes.addAll(routes);
@@ -79,6 +72,11 @@ class UriRouter {
   /// [RouteBuilder] to be used if `routeBuilder` is omitted in an added [UriRoute].
   ///
   final RouteBuilder defaultRouteBuilder;
+
+  ///
+  /// Route that is used if the requested route couldn't be found.
+  ///
+  final UriRoute? defaultRoute;
 
   ///
   /// Add the [UriRoute] `route`.
@@ -122,7 +120,16 @@ class UriRouter {
       return (route.routeBuilder ?? defaultRouteBuilder)(
           settings, (context) => route.pageBuilder(context, pageParams));
     }
-    return null;
+    if (defaultRoute == null) {
+      return null;
+    }
+    return (defaultRoute!.routeBuilder ?? defaultRouteBuilder)(
+      settings,
+      (context) => defaultRoute!.pageBuilder(
+        context,
+        PageParams(pathParams: <String, String>{}, uri: uri),
+      ),
+    );
   }
 
   static Route<dynamic> materialPageRouteBuilder(
@@ -220,7 +227,7 @@ class UriRoute with _$UriRoute {
       );
     }
     return Uri(
-      pathSegments: pathSegments,
+      pathSegments: ['', ...pathSegments],
       queryParameters: queryParams,
     ).toString();
   }
