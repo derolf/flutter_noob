@@ -147,8 +147,7 @@ class _DisposableHook<T extends Object> extends Hook<T> {
   _DisposableHookState<T> createState() => _DisposableHookState<T>();
 }
 
-class _DisposableHookState<T extends Object>
-    extends HookState<T, _DisposableHook<T>> {
+class _DisposableHookState<T extends Object> extends HookState<T, _DisposableHook<T>> {
   late T _value;
 
   @override
@@ -190,4 +189,41 @@ AsyncData<T>? useLastValidAsyncData<T>(AsyncValue<T> value) {
     state.value = null;
   }
   return state.value;
+}
+
+class AsyncValueCached<T> {
+  AsyncValueCached({
+    required this.cached,
+    required this.refresh,
+  });
+  final AsyncValue<T> cached;
+  void Function({required bool reset}) refresh;
+  void hardRefresh() => refresh(reset: true);
+  void softRefresh() => refresh(reset: false);
+}
+
+AsyncValueCached<T> useAsyncValueProvider<T>(RootProvider<Object?, AsyncValue<T>> provider, [List<Object?> keys = const <Object>[]]) {
+  final context = useContext();
+  final value = useProvider(provider);
+  final cached = useState<AsyncValue<T>>(value);
+
+  void refresh({bool reset = false}) {
+    if (reset) {
+      cached.value = const AsyncLoading();
+    }
+    context.refresh(provider);
+  }
+
+  useEffect(() {
+    cached.value = value;
+  }, keys);
+
+  if (value is AsyncData<T> || value is AsyncError) {
+    cached.value = value;
+  }
+
+  return AsyncValueCached<T>(
+    cached: cached.value,
+    refresh: refresh,
+  );
 }

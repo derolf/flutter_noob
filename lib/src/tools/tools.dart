@@ -12,6 +12,14 @@ extension ObjectExt<T> on T {
   T? get $ => this;
 }
 
+extension StringExt on String {
+  Iterable<String> iterable() sync* {
+    for (var i = 0; i < length; i++) {
+      yield this[i];
+    }
+  }
+}
+
 extension AsyncValueExt<T> on AsyncValue<T> {
   ///
   /// Handy variant of [when] with mapping:

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:noob/src/tools/constants.dart';
 import 'package:noob/src/tools/tools.dart';
 
 ///
@@ -60,9 +59,7 @@ class PointerIndicator extends StatelessWidget {
                     : IgnorePointer(
                         child: Stack(
                           children: pointers.values.map((_) {
-                            final size = minIndicatorSize +
-                                (normalIndicatorSize - minIndicatorSize) *
-                                    _.pressure;
+                            final size = minIndicatorSize + (normalIndicatorSize - minIndicatorSize) * _.pressure;
                             return Positioned(
                               left: _.position.dx - size / 2 - pos.dx,
                               top: _.position.dy - size / 2 - pos.dy,

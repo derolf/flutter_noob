@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 ///
@@ -20,9 +21,7 @@ mixin TrackingBuildOwnerWidgetsBindingMixin on WidgetsBinding {
       _buildOwner ??
       (super.buildOwner == null
           ? null
-          : _buildOwner = TrackingBuildOwner(
-              onBuildScheduled: super.buildOwner!.onBuildScheduled,
-              focusManager: super.buildOwner!.focusManager));
+          : _buildOwner = TrackingBuildOwner(onBuildScheduled: super.buildOwner!.onBuildScheduled, focusManager: super.buildOwner!.focusManager));
 
   TrackingBuildOwner? _buildOwner;
 }
@@ -30,8 +29,7 @@ mixin TrackingBuildOwnerWidgetsBindingMixin on WidgetsBinding {
 ///
 /// [WidgetsFlutterBinding] with [TrackingBuildOwnerWidgetsBindingMixin]
 ///
-class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding
-    with TrackingBuildOwnerWidgetsBindingMixin {
+class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding with TrackingBuildOwnerWidgetsBindingMixin {
   static WidgetsBinding ensureInitialized() {
     if (WidgetsBinding.instance == null) {
       TrackingBuildOwnerWidgetsFlutterBinding();
@@ -58,10 +56,10 @@ class TrackingBuildOwner extends BuildOwner {
   }
 
   @override
-  void reassemble(Element root) {
+  void reassemble(Element root, DebugReassembleConfig? reassembleConfig) {
     _isReassembling++;
     try {
-      super.reassemble(root);
+      super.reassemble(root, reassembleConfig);
     } finally {
       _isReassembling--;
     }
