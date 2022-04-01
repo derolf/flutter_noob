@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'build_tracker.dart';
 
@@ -129,19 +131,17 @@ class _$_RebuildDirtyWidget implements _RebuildDirtyWidget {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RebuildDirtyWidget &&
-            (identical(other.timestamp, timestamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.timestamp, timestamp)) &&
-            (identical(other.widget, widget) ||
-                const DeepCollectionEquality().equals(other.widget, widget)));
+        (other.runtimeType == runtimeType &&
+            other is _RebuildDirtyWidget &&
+            const DeepCollectionEquality().equals(other.timestamp, timestamp) &&
+            const DeepCollectionEquality().equals(other.widget, widget));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(timestamp) ^
-      const DeepCollectionEquality().hash(widget);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(timestamp),
+      const DeepCollectionEquality().hash(widget));
 
   @JsonKey(ignore: true)
   @override
@@ -154,9 +154,9 @@ abstract class _RebuildDirtyWidget implements RebuildDirtyWidget {
       {required int timestamp, required String widget}) = _$_RebuildDirtyWidget;
 
   @override
-  int get timestamp => throw _privateConstructorUsedError;
+  int get timestamp;
   @override
-  String get widget => throw _privateConstructorUsedError;
+  String get widget;
   @override
   @JsonKey(ignore: true)
   _$RebuildDirtyWidgetCopyWith<_RebuildDirtyWidget> get copyWith =>
@@ -298,22 +298,19 @@ class _$_ScheduleBuildFor implements _ScheduleBuildFor {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ScheduleBuildFor &&
-            (identical(other.timestamp, timestamp) ||
-                const DeepCollectionEquality()
-                    .equals(other.timestamp, timestamp)) &&
-            (identical(other.widget, widget) ||
-                const DeepCollectionEquality().equals(other.widget, widget)) &&
-            (identical(other.stack, stack) ||
-                const DeepCollectionEquality().equals(other.stack, stack)));
+        (other.runtimeType == runtimeType &&
+            other is _ScheduleBuildFor &&
+            const DeepCollectionEquality().equals(other.timestamp, timestamp) &&
+            const DeepCollectionEquality().equals(other.widget, widget) &&
+            const DeepCollectionEquality().equals(other.stack, stack));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(timestamp) ^
-      const DeepCollectionEquality().hash(widget) ^
-      const DeepCollectionEquality().hash(stack);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(timestamp),
+      const DeepCollectionEquality().hash(widget),
+      const DeepCollectionEquality().hash(stack));
 
   @JsonKey(ignore: true)
   @override
@@ -328,11 +325,11 @@ abstract class _ScheduleBuildFor implements ScheduleBuildFor {
       required BuiltList<String> stack}) = _$_ScheduleBuildFor;
 
   @override
-  int get timestamp => throw _privateConstructorUsedError;
+  int get timestamp;
   @override
-  String get widget => throw _privateConstructorUsedError;
+  String get widget;
   @override
-  BuiltList<String> get stack => throw _privateConstructorUsedError;
+  BuiltList<String> get stack;
   @override
   @JsonKey(ignore: true)
   _$ScheduleBuildForCopyWith<_ScheduleBuildFor> get copyWith =>
@@ -481,23 +478,21 @@ class _$_BuildFrame implements _BuildFrame {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _BuildFrame &&
-            (identical(other.number, number) ||
-                const DeepCollectionEquality().equals(other.number, number)) &&
-            (identical(other.rebuildDirtyWidgets, rebuildDirtyWidgets) ||
-                const DeepCollectionEquality()
-                    .equals(other.rebuildDirtyWidgets, rebuildDirtyWidgets)) &&
-            (identical(other.schedueBuildFors, schedueBuildFors) ||
-                const DeepCollectionEquality()
-                    .equals(other.schedueBuildFors, schedueBuildFors)));
+        (other.runtimeType == runtimeType &&
+            other is _BuildFrame &&
+            const DeepCollectionEquality().equals(other.number, number) &&
+            const DeepCollectionEquality()
+                .equals(other.rebuildDirtyWidgets, rebuildDirtyWidgets) &&
+            const DeepCollectionEquality()
+                .equals(other.schedueBuildFors, schedueBuildFors));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(number) ^
-      const DeepCollectionEquality().hash(rebuildDirtyWidgets) ^
-      const DeepCollectionEquality().hash(schedueBuildFors);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(number),
+      const DeepCollectionEquality().hash(rebuildDirtyWidgets),
+      const DeepCollectionEquality().hash(schedueBuildFors));
 
   @JsonKey(ignore: true)
   @override
@@ -512,13 +507,11 @@ abstract class _BuildFrame implements BuildFrame {
       required BuiltList<ScheduleBuildFor> schedueBuildFors}) = _$_BuildFrame;
 
   @override
-  int get number => throw _privateConstructorUsedError;
+  int get number;
   @override
-  BuiltList<RebuildDirtyWidget> get rebuildDirtyWidgets =>
-      throw _privateConstructorUsedError;
+  BuiltList<RebuildDirtyWidget> get rebuildDirtyWidgets;
   @override
-  BuiltList<ScheduleBuildFor> get schedueBuildFors =>
-      throw _privateConstructorUsedError;
+  BuiltList<ScheduleBuildFor> get schedueBuildFors;
   @override
   @JsonKey(ignore: true)
   _$BuildFrameCopyWith<_BuildFrame> get copyWith =>

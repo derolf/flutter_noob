@@ -11,7 +11,10 @@ typedef PageBuilder = Widget Function(BuildContext context, PageParams params);
 ///
 /// See [UriRoute].
 ///
-typedef RouteBuilder = Route<dynamic> Function(RouteSettings settings, WidgetBuilder builder);
+typedef RouteBuilder = Route<dynamic> Function(
+  RouteSettings settings,
+  WidgetBuilder builder,
+);
 
 ///
 /// See [UriRoute].
@@ -102,7 +105,8 @@ class UriRouter {
       }
       bool failed = false;
       for (var i = 0; !failed && i < pathSegments.length; i++) {
-        failed = !route.pathSegmentIsKey[i] && pathSegments[i] != route.pathSegments[i];
+        failed = !route.pathSegmentIsKey[i] &&
+            pathSegments[i] != route.pathSegments[i];
       }
       if (failed) {
         continue;
@@ -114,7 +118,10 @@ class UriRouter {
         }
       }
       final pageParams = PageParams(pathParams: pathParams, uri: uri);
-      return (route.routeBuilder ?? defaultRouteBuilder)(settings, (context) => route.pageBuilder(context, pageParams));
+      return (route.routeBuilder ?? defaultRouteBuilder)(
+        settings,
+        (context) => route.pageBuilder(context, pageParams),
+      );
     }
     if (defaultRoute == null) {
       return null;
@@ -128,7 +135,11 @@ class UriRouter {
     );
   }
 
-  static Route<dynamic> materialPageRouteBuilder(RouteSettings settings, WidgetBuilder builder) => MaterialPageRoute<dynamic>(
+  static Route<dynamic> materialPageRouteBuilder(
+    RouteSettings settings,
+    WidgetBuilder builder,
+  ) =>
+      MaterialPageRoute<dynamic>(
         settings: settings,
         builder: builder,
       );
@@ -171,12 +182,16 @@ class UriRoute with _$UriRoute {
   ///
   /// Path segments with the leading `:` of keys being stripped.
   ///
-  late final List<String> pathSegments = Uri.parse(path).pathSegments.mapIndexed((i, _) => pathSegmentIsKey[i] ? _.substring(1) : _).toList();
+  late final List<String> pathSegments = Uri.parse(path)
+      .pathSegments
+      .mapIndexed((i, _) => pathSegmentIsKey[i] ? _.substring(1) : _)
+      .toList();
 
   ///
   /// Tell whether the given segment is a key (has a leading `:` in [path]).
   ///
-  late final List<bool> pathSegmentIsKey = Uri.parse(path).pathSegments.map((_) => _.startsWith(':')).toList();
+  late final List<bool> pathSegmentIsKey =
+      Uri.parse(path).pathSegments.map((_) => _.startsWith(':')).toList();
 
   ///
   /// Build the `path` with the given arguments.

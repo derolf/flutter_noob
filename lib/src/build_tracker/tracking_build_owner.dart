@@ -21,7 +21,10 @@ mixin TrackingBuildOwnerWidgetsBindingMixin on WidgetsBinding {
       _buildOwner ??
       (super.buildOwner == null
           ? null
-          : _buildOwner = TrackingBuildOwner(onBuildScheduled: super.buildOwner!.onBuildScheduled, focusManager: super.buildOwner!.focusManager));
+          : _buildOwner = TrackingBuildOwner(
+              onBuildScheduled: super.buildOwner!.onBuildScheduled,
+              focusManager: super.buildOwner!.focusManager,
+            ));
 
   TrackingBuildOwner? _buildOwner;
 }
@@ -29,7 +32,8 @@ mixin TrackingBuildOwnerWidgetsBindingMixin on WidgetsBinding {
 ///
 /// [WidgetsFlutterBinding] with [TrackingBuildOwnerWidgetsBindingMixin]
 ///
-class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding with TrackingBuildOwnerWidgetsBindingMixin {
+class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding
+    with TrackingBuildOwnerWidgetsBindingMixin {
   static WidgetsBinding ensureInitialized() {
     if (WidgetsBinding.instance == null) {
       TrackingBuildOwnerWidgetsFlutterBinding();

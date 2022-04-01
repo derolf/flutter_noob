@@ -45,38 +45,43 @@ class PointerIndicator extends StatelessWidget {
   final Widget? child;
 
   @override
-  Widget build(BuildContext context) => Stack(children: [
-        if (child != null) child!,
-        if (enabled)
-          Positioned.fill(
-            child: Consumer(
-              key: const ValueKey('PositionIndicator'),
-              builder: (context, watch, _) {
-                final pointers = watch(lastPointerEventProvider);
-                final pos = watch(globalPositionProvider(context))?.topLeft;
-                return pos == null
-                    ? kEmpty
-                    : IgnorePointer(
-                        child: Stack(
-                          children: pointers.values.map((_) {
-                            final size = minIndicatorSize + (normalIndicatorSize - minIndicatorSize) * _.pressure;
-                            return Positioned(
-                              left: _.position.dx - size / 2 - pos.dx,
-                              top: _.position.dy - size / 2 - pos.dy,
-                              child: Container(
-                                width: size,
-                                height: size,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: indicatorColor,
+  Widget build(BuildContext context) => Stack(
+        children: [
+          if (child != null) child!,
+          if (enabled)
+            Positioned.fill(
+              child: Consumer(
+                key: const ValueKey('PositionIndicator'),
+                builder: (context, ref, _) {
+                  final pointers = ref.watch(lastPointerEventProvider);
+                  final pos =
+                      ref.watch(globalPositionProvider(context))?.topLeft;
+                  return pos == null
+                      ? kEmpty
+                      : IgnorePointer(
+                          child: Stack(
+                            children: pointers.values.map((_) {
+                              final size = minIndicatorSize +
+                                  (normalIndicatorSize - minIndicatorSize) *
+                                      _.pressure;
+                              return Positioned(
+                                left: _.position.dx - size / 2 - pos.dx,
+                                top: _.position.dy - size / 2 - pos.dy,
+                                child: Container(
+                                  width: size,
+                                  height: size,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: indicatorColor,
+                                  ),
                                 ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      );
-              },
+                              );
+                            }).toList(),
+                          ),
+                        );
+                },
+              ),
             ),
-          ),
-      ]);
+        ],
+      );
 }

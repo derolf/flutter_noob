@@ -27,15 +27,19 @@ void main() {
   TrackingBuildOwnerWidgetsFlutterBinding.ensureInitialized();
 
   // print top 10 stacks leading to rebuilds every 10 seconds
-  Timer.periodic(const Duration(seconds: 10),
-      (_) => buildTracker.printTopScheduleBuildForStacks());
+  Timer.periodic(
+    const Duration(seconds: 10),
+    (_) => buildTracker.printTopScheduleBuildForStacks(),
+  );
 
-  final router = UriRouter(routes: [
-    MyHomePage.route,
-    PointerIndicatorExample.route,
-    BuildTrackerExample.route,
-    BooksPage.route,
-  ]);
+  final router = UriRouter(
+    routes: [
+      MyHomePage.route,
+      PointerIndicatorExample.route,
+      BuildTrackerExample.route,
+      BooksPage.route,
+    ],
+  );
 
   runApp(
     ProviderScope(
@@ -112,7 +116,9 @@ class MyHomePage extends HookWidget {
 
 class PointerIndicatorExample extends HookWidget {
   static final route = UriRoute.widget(
-      path: 'PointerIndicator', child: const PointerIndicatorExample());
+    path: 'PointerIndicator',
+    child: const PointerIndicatorExample(),
+  );
   static final path = route.build();
 
   const PointerIndicatorExample({Key? key}) : super(key: key);
@@ -134,7 +140,7 @@ class PointerIndicatorExample extends HookWidget {
 
 final counterProvider = StateProvider((ref) => 0);
 
-class BuildTrackerExample extends HookWidget {
+class BuildTrackerExample extends HookConsumerWidget {
   static final route =
       UriRoute.widget(path: 'BuildTracker', child: const BuildTrackerExample());
   static final path = route.build();
@@ -142,7 +148,7 @@ class BuildTrackerExample extends HookWidget {
   const BuildTrackerExample({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final log = useValueNotifier('');
     useEffect(() {
       buildTracker.enabled = true;
@@ -156,7 +162,7 @@ class BuildTrackerExample extends HookWidget {
         debugPrint = savedDebugPrint;
       };
     });
-    final counter = useProvider(counterProvider).state;
+    final counter = ref.watch(counterProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('BuildTracker')),
       body: Align(
@@ -170,10 +176,14 @@ class BuildTrackerExample extends HookWidget {
                 key: const ValueKey('ignore'),
                 builder: (_) {
                   final controller = useScrollController();
-                  WidgetsBinding.instance!.addPostFrameCallback((_) =>
-                      controller.jumpTo(controller.position.maxScrollExtent));
+                  WidgetsBinding.instance!.addPostFrameCallback(
+                    (_) =>
+                        controller.jumpTo(controller.position.maxScrollExtent),
+                  );
                   return Markdown(
-                      data: useValueListenable(log), controller: controller);
+                    data: useValueListenable(log),
+                    controller: controller,
+                  );
                 },
               ),
             ),
@@ -181,7 +191,7 @@ class BuildTrackerExample extends HookWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read(counterProvider).state++,
+        onPressed: () => ref.read(counterProvider.notifier).state++,
         child: const Icon(Icons.add),
       ),
     );

@@ -11,4 +11,4 @@ ios/
 /coverage
 pubspec.lock
 .vscode/
-.fvm
+.fvm/flutter_sdk

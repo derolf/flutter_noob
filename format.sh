@@ -1,1 +1,1 @@
-dartfmt -w .
+fvm flutter format .

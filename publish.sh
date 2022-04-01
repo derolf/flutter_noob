@@ -1,3 +1,4 @@
 ./format.sh
-flutter analyze
-dart pub publish 
+fvm flutter analyze
+fvm flutter test
+fvm dart pub publish 

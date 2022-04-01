@@ -1,5 +1,7 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'router.dart';
 
@@ -127,19 +129,18 @@ class _$_PageParams extends _PageParams {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PageParams &&
-            (identical(other.pathParams, pathParams) ||
-                const DeepCollectionEquality()
-                    .equals(other.pathParams, pathParams)) &&
-            (identical(other.uri, uri) ||
-                const DeepCollectionEquality().equals(other.uri, uri)));
+        (other.runtimeType == runtimeType &&
+            other is _PageParams &&
+            const DeepCollectionEquality()
+                .equals(other.pathParams, pathParams) &&
+            const DeepCollectionEquality().equals(other.uri, uri));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(pathParams) ^
-      const DeepCollectionEquality().hash(uri);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(pathParams),
+      const DeepCollectionEquality().hash(uri));
 
   @JsonKey(ignore: true)
   @override
@@ -154,9 +155,9 @@ abstract class _PageParams extends PageParams {
   _PageParams._() : super._();
 
   @override
-  Map<String, String> get pathParams => throw _privateConstructorUsedError;
+  Map<String, String> get pathParams;
   @override
-  Uri get uri => throw _privateConstructorUsedError;
+  Uri get uri;
   @override
   @JsonKey(ignore: true)
   _$PageParamsCopyWith<_PageParams> get copyWith =>
@@ -169,9 +170,8 @@ class _$UriRouteTearOff {
 
   _UriRoute call(
       {required String path,
-      required Widget Function(BuildContext, PageParams) pageBuilder,
-      Route<dynamic> Function(RouteSettings, Widget Function(BuildContext))?
-          routeBuilder}) {
+      required PageBuilder pageBuilder,
+      RouteBuilder? routeBuilder}) {
     return _UriRoute(
       path: path,
       pageBuilder: pageBuilder,
@@ -186,10 +186,8 @@ const $UriRoute = _$UriRouteTearOff();
 /// @nodoc
 mixin _$UriRoute {
   String get path => throw _privateConstructorUsedError;
-  Widget Function(BuildContext, PageParams) get pageBuilder =>
-      throw _privateConstructorUsedError;
-  Route<dynamic> Function(RouteSettings, Widget Function(BuildContext))?
-      get routeBuilder => throw _privateConstructorUsedError;
+  PageBuilder get pageBuilder => throw _privateConstructorUsedError;
+  RouteBuilder? get routeBuilder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UriRouteCopyWith<UriRoute> get copyWith =>
@@ -200,11 +198,7 @@ mixin _$UriRoute {
 abstract class $UriRouteCopyWith<$Res> {
   factory $UriRouteCopyWith(UriRoute value, $Res Function(UriRoute) then) =
       _$UriRouteCopyWithImpl<$Res>;
-  $Res call(
-      {String path,
-      Widget Function(BuildContext, PageParams) pageBuilder,
-      Route<dynamic> Function(RouteSettings, Widget Function(BuildContext))?
-          routeBuilder});
+  $Res call({String path, PageBuilder pageBuilder, RouteBuilder? routeBuilder});
 }
 
 /// @nodoc
@@ -229,12 +223,11 @@ class _$UriRouteCopyWithImpl<$Res> implements $UriRouteCopyWith<$Res> {
       pageBuilder: pageBuilder == freezed
           ? _value.pageBuilder
           : pageBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(BuildContext, PageParams),
+              as PageBuilder,
       routeBuilder: routeBuilder == freezed
           ? _value.routeBuilder
           : routeBuilder // ignore: cast_nullable_to_non_nullable
-              as Route<dynamic> Function(
-                  RouteSettings, Widget Function(BuildContext))?,
+              as RouteBuilder?,
     ));
   }
 }
@@ -244,11 +237,7 @@ abstract class _$UriRouteCopyWith<$Res> implements $UriRouteCopyWith<$Res> {
   factory _$UriRouteCopyWith(_UriRoute value, $Res Function(_UriRoute) then) =
       __$UriRouteCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String path,
-      Widget Function(BuildContext, PageParams) pageBuilder,
-      Route<dynamic> Function(RouteSettings, Widget Function(BuildContext))?
-          routeBuilder});
+  $Res call({String path, PageBuilder pageBuilder, RouteBuilder? routeBuilder});
 }
 
 /// @nodoc
@@ -274,12 +263,11 @@ class __$UriRouteCopyWithImpl<$Res> extends _$UriRouteCopyWithImpl<$Res>
       pageBuilder: pageBuilder == freezed
           ? _value.pageBuilder
           : pageBuilder // ignore: cast_nullable_to_non_nullable
-              as Widget Function(BuildContext, PageParams),
+              as PageBuilder,
       routeBuilder: routeBuilder == freezed
           ? _value.routeBuilder
           : routeBuilder // ignore: cast_nullable_to_non_nullable
-              as Route<dynamic> Function(
-                  RouteSettings, Widget Function(BuildContext))?,
+              as RouteBuilder?,
     ));
   }
 }
@@ -294,10 +282,9 @@ class _$_UriRoute extends _UriRoute {
   @override
   final String path;
   @override
-  final Widget Function(BuildContext, PageParams) pageBuilder;
+  final PageBuilder pageBuilder;
   @override
-  final Route<dynamic> Function(RouteSettings, Widget Function(BuildContext))?
-      routeBuilder;
+  final RouteBuilder? routeBuilder;
 
   @override
   String toString() {
@@ -307,23 +294,18 @@ class _$_UriRoute extends _UriRoute {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UriRoute &&
-            (identical(other.path, path) ||
-                const DeepCollectionEquality().equals(other.path, path)) &&
+        (other.runtimeType == runtimeType &&
+            other is _UriRoute &&
+            const DeepCollectionEquality().equals(other.path, path) &&
             (identical(other.pageBuilder, pageBuilder) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageBuilder, pageBuilder)) &&
+                other.pageBuilder == pageBuilder) &&
             (identical(other.routeBuilder, routeBuilder) ||
-                const DeepCollectionEquality()
-                    .equals(other.routeBuilder, routeBuilder)));
+                other.routeBuilder == routeBuilder));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(path) ^
-      const DeepCollectionEquality().hash(pageBuilder) ^
-      const DeepCollectionEquality().hash(routeBuilder);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(path), pageBuilder, routeBuilder);
 
   @JsonKey(ignore: true)
   @override
@@ -334,19 +316,16 @@ class _$_UriRoute extends _UriRoute {
 abstract class _UriRoute extends UriRoute {
   factory _UriRoute(
       {required String path,
-      required Widget Function(BuildContext, PageParams) pageBuilder,
-      Route<dynamic> Function(RouteSettings, Widget Function(BuildContext))?
-          routeBuilder}) = _$_UriRoute;
+      required PageBuilder pageBuilder,
+      RouteBuilder? routeBuilder}) = _$_UriRoute;
   _UriRoute._() : super._();
 
   @override
-  String get path => throw _privateConstructorUsedError;
+  String get path;
   @override
-  Widget Function(BuildContext, PageParams) get pageBuilder =>
-      throw _privateConstructorUsedError;
+  PageBuilder get pageBuilder;
   @override
-  Route<dynamic> Function(RouteSettings, Widget Function(BuildContext))?
-      get routeBuilder => throw _privateConstructorUsedError;
+  RouteBuilder? get routeBuilder;
   @override
   @JsonKey(ignore: true)
   _$UriRouteCopyWith<_UriRoute> get copyWith =>

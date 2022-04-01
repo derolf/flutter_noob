@@ -22,3 +22,7 @@ First release:
 ## 0.0.5
 
 - Upgrade Flutter version 
+
+## 0.0.6
+
+- Upgrade dependency versions

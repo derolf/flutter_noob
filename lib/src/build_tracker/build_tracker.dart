@@ -1,9 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:noob/src/build_tracker/tracking_build_owner.dart';
 import 'package:stack_trace/stack_trace.dart';
-
-import 'tracking_build_owner.dart';
 
 export 'test_tracking_build_owner.dart' if (dart.library.html) '_empty.dart';
 export 'tracking_build_owner.dart';
@@ -129,9 +128,12 @@ class BuildTracker {
     if (_isIgnored(e.debugGetCreatorChain(10))) {
       return;
     }
-    _buildList.add(RebuildDirtyWidget(
+    _buildList.add(
+      RebuildDirtyWidget(
         timestamp: DateTime.now().millisecondsSinceEpoch,
-        widget: e.debugGetCreatorChain(10)));
+        widget: e.debugGetCreatorChain(10),
+      ),
+    );
   }
 
   void _onDebugOnScheduleBuildFor(Element e) {
@@ -236,7 +238,8 @@ class BuildTracker {
         debugPrint('');
         if (printedIn != null) {
           debugPrint(
-              'Stack trace #$stackHash observed in frame #$printedIn for the first time');
+            'Stack trace #$stackHash observed in frame #$printedIn for the first time',
+          );
         } else {
           _printedStacksFirstFrame[stack] = frame.number;
 
@@ -251,7 +254,8 @@ class BuildTracker {
               'package:flutter_test/',
             }.any((_) => location.startsWith(_));
             debugPrint(
-                '${isCore ? ' ' : '*'} ${member.padRight(40)} $location');
+              '${isCore ? ' ' : '*'} ${member.padRight(40)} $location',
+            );
           }
           debugPrint('```');
         }

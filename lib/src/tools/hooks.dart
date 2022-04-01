@@ -63,19 +63,22 @@ void useListener(
   // store the latest version of `callback`
   final callbackHolder = useVariable(callback)..value = callback;
 
-  useEffect(() {
-    if (listenable == null) {
-      return null;
-    }
+  useEffect(
+    () {
+      if (listenable == null) {
+        return null;
+      }
 
-    void _callback() => callbackHolder.value.call();
+      void _callback() => callbackHolder.value.call();
 
-    listenable.addListener(_callback);
-    if (callInitially) {
-      _callback();
-    }
-    return () => listenable.removeListener(_callback);
-  }, [listenable]);
+      listenable.addListener(_callback);
+      if (callInitially) {
+        _callback();
+      }
+      return () => listenable.removeListener(_callback);
+    },
+    [listenable],
+  );
 }
 
 ///
@@ -103,18 +106,21 @@ void useValueListener<T>(
   // store the latest version of `callback`
   final callbackHolder = useVariable(callback)..value = callback;
 
-  useEffect(() {
-    if (listenable == null) {
-      return null;
-    }
-    void _callback() => callbackHolder.value(listenable.value);
+  useEffect(
+    () {
+      if (listenable == null) {
+        return null;
+      }
+      void _callback() => callbackHolder.value(listenable.value);
 
-    listenable.addListener(_callback);
-    if (callInitially) {
-      callback(listenable.value);
-    }
-    return () => listenable.removeListener(_callback);
-  }, [listenable]);
+      listenable.addListener(_callback);
+      if (callInitially) {
+        callback(listenable.value);
+      }
+      return () => listenable.removeListener(_callback);
+    },
+    [listenable],
+  );
 }
 
 ///
@@ -147,7 +153,8 @@ class _DisposableHook<T extends Object> extends Hook<T> {
   _DisposableHookState<T> createState() => _DisposableHookState<T>();
 }
 
-class _DisposableHookState<T extends Object> extends HookState<T, _DisposableHook<T>> {
+class _DisposableHookState<T extends Object>
+    extends HookState<T, _DisposableHook<T>> {
   late T _value;
 
   @override
@@ -202,24 +209,37 @@ class AsyncValueCached<T> {
   void softRefresh() => refresh(reset: false);
 }
 
-AsyncValueCached<T> useAsyncValueProvider<T>(RootProvider<Object?, AsyncValue<T>> provider, [List<Object?> keys = const <Object>[]]) {
+AsyncValueCached<T> useAsyncValueProvider<T>(
+  ProviderBase<AsyncValue<T>> provider,
+) {
   final context = useContext();
-  final value = useProvider(provider);
-  final cached = useState<AsyncValue<T>>(value);
+  final container = ProviderScope.containerOf(context);
+  final cached = useState<AsyncValue<T>>(const AsyncLoading());
+
+  useEffect(
+    () {
+      final sub = container.listen(
+        provider,
+        (_, AsyncValue<T> value) {
+          if (value is AsyncData<T> || value is AsyncError) {
+            cached.value = value;
+          }
+        },
+        fireImmediately: true,
+      );
+      return sub.close;
+    },
+    [
+      container,
+      provider,
+    ],
+  );
 
   void refresh({bool reset = false}) {
     if (reset) {
       cached.value = const AsyncLoading();
     }
-    context.refresh(provider);
-  }
-
-  useEffect(() {
-    cached.value = value;
-  }, keys);
-
-  if (value is AsyncData<T> || value is AsyncError) {
-    cached.value = value;
+    container.refresh(provider);
   }
 
   return AsyncValueCached<T>(

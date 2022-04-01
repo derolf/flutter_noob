@@ -56,7 +56,8 @@ class GlobalPositionStateNotifier extends StateNotifier<Rect?> {
     if (mounted) {
       final renderBox = context.findRenderObject() as RenderBox?;
       final rect = renderBox?.let(
-          (_) => _.attached ? _.localToGlobal(Offset.zero) & _.size : null);
+        (_) => _.attached ? _.localToGlobal(Offset.zero) & _.size : null,
+      );
       if (state != rect) {
         state = rect;
       }

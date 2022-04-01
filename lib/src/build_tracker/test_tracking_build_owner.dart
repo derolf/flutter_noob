@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'tracking_build_owner.dart';
+import 'package:noob/src/build_tracker/tracking_build_owner.dart';
 
 ///
 /// [AutomatedTestWidgetsFlutterBinding] with [TrackingBuildOwnerWidgetsBindingMixin]
