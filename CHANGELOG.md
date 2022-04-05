@@ -26,3 +26,7 @@ First release:
 ## 0.0.6
 
 - Upgrade dependency versions
+
+## 0.0.7
+
+- Bugfix in useValueListener

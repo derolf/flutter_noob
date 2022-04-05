@@ -101,7 +101,7 @@ typedef ValueCallback<T> = void Function(T value);
 void useValueListener<T>(
   ValueListenable<T>? listenable, {
   required bool callInitially,
-  required ValueCallback callback,
+  required ValueCallback<T> callback,
 }) {
   // store the latest version of `callback`
   final callbackHolder = useVariable(callback)..value = callback;
