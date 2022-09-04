@@ -120,7 +120,7 @@ class BuildTracker {
 
     if (value && !_frameCallbackScheduled) {
       _frameCallbackScheduled = true;
-      WidgetsBinding.instance!.addPostFrameCallback(_frameCallback);
+      WidgetsBinding.instance.addPostFrameCallback(_frameCallback);
     }
   }
 
@@ -194,7 +194,7 @@ class BuildTracker {
 
     if (_enabled && !_frameCallbackScheduled) {
       _frameCallbackScheduled = true;
-      WidgetsBinding.instance!.addPostFrameCallback(_frameCallback);
+      WidgetsBinding.instance.addPostFrameCallback(_frameCallback);
     }
   }
 

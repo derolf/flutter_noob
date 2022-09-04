@@ -9,12 +9,12 @@ import 'package:noob/noob.dart';
 class LastPointerEventProviderStateNotifier
     extends StateNotifier<BuiltMap<int, PointerEvent>> {
   LastPointerEventProviderStateNotifier() : super(BuiltMap()) {
-    WidgetsBinding.instance!.pointerRouter.addGlobalRoute(_handler);
+    WidgetsBinding.instance.pointerRouter.addGlobalRoute(_handler);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.pointerRouter.removeGlobalRoute(_handler);
+    WidgetsBinding.instance.pointerRouter.removeGlobalRoute(_handler);
     super.dispose();
   }
 
@@ -47,7 +47,7 @@ final lastPointerEventProvider = StateNotifierProvider.autoDispose<
 ///
 class GlobalPositionStateNotifier extends StateNotifier<Rect?> {
   GlobalPositionStateNotifier(this.context) : super(null) {
-    WidgetsBinding.instance!.addPostFrameCallback(_callback);
+    WidgetsBinding.instance.addPostFrameCallback(_callback);
   }
 
   final BuildContext context;
@@ -61,7 +61,7 @@ class GlobalPositionStateNotifier extends StateNotifier<Rect?> {
       if (state != rect) {
         state = rect;
       }
-      WidgetsBinding.instance!.addPostFrameCallback(_callback);
+      WidgetsBinding.instance.addPostFrameCallback(_callback);
     }
   }
 }
