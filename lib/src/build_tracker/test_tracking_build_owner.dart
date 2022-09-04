@@ -13,6 +13,6 @@ class TrackingBuildOwnerAutomatedTestWidgetsFlutterBinding
     if (WidgetsBinding.instance == null) {
       TrackingBuildOwnerAutomatedTestWidgetsFlutterBinding();
     }
-    return WidgetsBinding.instance!;
+    return WidgetsBinding.instance;
   }
 }
