@@ -38,7 +38,7 @@ class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding
     if (WidgetsBinding.instance == null) {
       TrackingBuildOwnerWidgetsFlutterBinding();
     }
-    return WidgetsBinding.instance!;
+    return WidgetsBinding.instance;
   }
 }
 
