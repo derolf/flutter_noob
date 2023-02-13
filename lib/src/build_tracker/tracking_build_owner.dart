@@ -35,11 +35,15 @@ mixin TrackingBuildOwnerWidgetsBindingMixin on WidgetsBinding {
 class TrackingBuildOwnerWidgetsFlutterBinding extends WidgetsFlutterBinding
     with TrackingBuildOwnerWidgetsBindingMixin {
   static WidgetsBinding ensureInitialized() {
-    if (WidgetsBinding.instance == null) {
+    if (!_initialized) {
+      _initialized = true;
       TrackingBuildOwnerWidgetsFlutterBinding();
     }
+    assert(WidgetsBinding.instance is TrackingBuildOwnerWidgetsFlutterBinding);
     return WidgetsBinding.instance;
   }
+
+  static var _initialized = false;
 }
 
 ///

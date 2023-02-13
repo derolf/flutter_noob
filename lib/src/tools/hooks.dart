@@ -69,13 +69,13 @@ void useListener(
         return null;
       }
 
-      void _callback() => callbackHolder.value.call();
+      void lcallback() => callbackHolder.value.call();
 
-      listenable.addListener(_callback);
+      listenable.addListener(lcallback);
       if (callInitially) {
-        _callback();
+        callback();
       }
-      return () => listenable.removeListener(_callback);
+      return () => listenable.removeListener(lcallback);
     },
     [listenable],
   );
@@ -111,13 +111,13 @@ void useValueListener<T>(
       if (listenable == null) {
         return null;
       }
-      void _callback() => callbackHolder.value(listenable.value);
+      void lcallback() => callbackHolder.value(listenable.value);
 
-      listenable.addListener(_callback);
+      listenable.addListener(lcallback);
       if (callInitially) {
         callback(listenable.value);
       }
-      return () => listenable.removeListener(_callback);
+      return () => listenable.removeListener(lcallback);
     },
     [listenable],
   );
@@ -158,7 +158,7 @@ class _DisposableHookState<T extends Object>
   late T _value;
 
   @override
-  T build(BuildContext _context) => _value;
+  T build(BuildContext context) => _value;
 
   @override
   void initHook() => _value = hook.create();

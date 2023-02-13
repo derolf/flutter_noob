@@ -176,7 +176,7 @@ class BuildTrackerExample extends HookConsumerWidget {
                 key: const ValueKey('ignore'),
                 builder: (_) {
                   final controller = useScrollController();
-                  WidgetsBinding.instance!.addPostFrameCallback(
+                  WidgetsBinding.instance.addPostFrameCallback(
                     (_) =>
                         controller.jumpTo(controller.position.maxScrollExtent),
                   );

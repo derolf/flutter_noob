@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import "package:flutter/material.dart";
+import "package:freezed_annotation/freezed_annotation.dart";
+import "package:collection/collection.dart";
 
-part 'router.freezed.dart';
+part "router.freezed.dart";
 
 ///
 /// See [UriRoute].
@@ -191,7 +192,7 @@ class UriRoute with _$UriRoute {
   /// Tell whether the given segment is a key (has a leading `:` in [path]).
   ///
   late final List<bool> pathSegmentIsKey =
-      Uri.parse(path).pathSegments.map((_) => _.startsWith(':')).toList();
+      Uri.parse(path).pathSegments.map((_) => _.startsWith(":")).toList();
 
   ///
   /// Build the `path` with the given arguments.
@@ -215,7 +216,7 @@ class UriRoute with _$UriRoute {
         if (i == pathSegments.length) {
           throw ArgumentError.value(
             pathParams,
-            'pathParams',
+            "pathParams",
             'Key ${e.key} is not a segment key in path "$path"',
           );
         }
@@ -227,12 +228,12 @@ class UriRoute with _$UriRoute {
     if (i >= 0) {
       throw ArgumentError.value(
         pathParams,
-        'pathParams',
+        "pathParams",
         'Missing a value for segment key ${pathSegments[i]} in path "$path"',
       );
     }
     return Uri(
-      pathSegments: ['', ...pathSegments],
+      pathSegments: ["", ...pathSegments],
       queryParameters: queryParams,
     ).toString();
   }

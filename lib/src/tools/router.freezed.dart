@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'router.dart';
 
@@ -12,23 +12,7 @@ part of 'router.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$PageParamsTearOff {
-  const _$PageParamsTearOff();
-
-  _PageParams call(
-      {required Map<String, String> pathParams, required Uri uri}) {
-    return _PageParams(
-      pathParams: pathParams,
-      uri: uri,
-    );
-  }
-}
-
-/// @nodoc
-const $PageParams = _$PageParamsTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$PageParams {
@@ -44,66 +28,71 @@ mixin _$PageParams {
 abstract class $PageParamsCopyWith<$Res> {
   factory $PageParamsCopyWith(
           PageParams value, $Res Function(PageParams) then) =
-      _$PageParamsCopyWithImpl<$Res>;
+      _$PageParamsCopyWithImpl<$Res, PageParams>;
+  @useResult
   $Res call({Map<String, String> pathParams, Uri uri});
 }
 
 /// @nodoc
-class _$PageParamsCopyWithImpl<$Res> implements $PageParamsCopyWith<$Res> {
+class _$PageParamsCopyWithImpl<$Res, $Val extends PageParams>
+    implements $PageParamsCopyWith<$Res> {
   _$PageParamsCopyWithImpl(this._value, this._then);
 
-  final PageParams _value;
   // ignore: unused_field
-  final $Res Function(PageParams) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pathParams = freezed,
-    Object? uri = freezed,
+    Object? pathParams = null,
+    Object? uri = null,
   }) {
     return _then(_value.copyWith(
-      pathParams: pathParams == freezed
+      pathParams: null == pathParams
           ? _value.pathParams
           : pathParams // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      uri: uri == freezed
+      uri: null == uri
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
               as Uri,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$PageParamsCopyWith<$Res> implements $PageParamsCopyWith<$Res> {
-  factory _$PageParamsCopyWith(
-          _PageParams value, $Res Function(_PageParams) then) =
-      __$PageParamsCopyWithImpl<$Res>;
+abstract class _$$_PageParamsCopyWith<$Res>
+    implements $PageParamsCopyWith<$Res> {
+  factory _$$_PageParamsCopyWith(
+          _$_PageParams value, $Res Function(_$_PageParams) then) =
+      __$$_PageParamsCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({Map<String, String> pathParams, Uri uri});
 }
 
 /// @nodoc
-class __$PageParamsCopyWithImpl<$Res> extends _$PageParamsCopyWithImpl<$Res>
-    implements _$PageParamsCopyWith<$Res> {
-  __$PageParamsCopyWithImpl(
-      _PageParams _value, $Res Function(_PageParams) _then)
-      : super(_value, (v) => _then(v as _PageParams));
+class __$$_PageParamsCopyWithImpl<$Res>
+    extends _$PageParamsCopyWithImpl<$Res, _$_PageParams>
+    implements _$$_PageParamsCopyWith<$Res> {
+  __$$_PageParamsCopyWithImpl(
+      _$_PageParams _value, $Res Function(_$_PageParams) _then)
+      : super(_value, _then);
 
-  @override
-  _PageParams get _value => super._value as _PageParams;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pathParams = freezed,
-    Object? uri = freezed,
+    Object? pathParams = null,
+    Object? uri = null,
   }) {
-    return _then(_PageParams(
-      pathParams: pathParams == freezed
-          ? _value.pathParams
+    return _then(_$_PageParams(
+      pathParams: null == pathParams
+          ? _value._pathParams
           : pathParams // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
-      uri: uri == freezed
+      uri: null == uri
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
               as Uri,
@@ -114,10 +103,19 @@ class __$PageParamsCopyWithImpl<$Res> extends _$PageParamsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PageParams extends _PageParams {
-  _$_PageParams({required this.pathParams, required this.uri}) : super._();
+  _$_PageParams(
+      {required final Map<String, String> pathParams, required this.uri})
+      : _pathParams = pathParams,
+        super._();
 
+  final Map<String, String> _pathParams;
   @override
-  final Map<String, String> pathParams;
+  Map<String, String> get pathParams {
+    if (_pathParams is EqualUnmodifiableMapView) return _pathParams;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_pathParams);
+  }
+
   @override
   final Uri uri;
 
@@ -130,28 +128,27 @@ class _$_PageParams extends _PageParams {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PageParams &&
+            other is _$_PageParams &&
             const DeepCollectionEquality()
-                .equals(other.pathParams, pathParams) &&
-            const DeepCollectionEquality().equals(other.uri, uri));
+                .equals(other._pathParams, _pathParams) &&
+            (identical(other.uri, uri) || other.uri == uri));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(pathParams),
-      const DeepCollectionEquality().hash(uri));
+      runtimeType, const DeepCollectionEquality().hash(_pathParams), uri);
 
   @JsonKey(ignore: true)
   @override
-  _$PageParamsCopyWith<_PageParams> get copyWith =>
-      __$PageParamsCopyWithImpl<_PageParams>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_PageParamsCopyWith<_$_PageParams> get copyWith =>
+      __$$_PageParamsCopyWithImpl<_$_PageParams>(this, _$identity);
 }
 
 abstract class _PageParams extends PageParams {
   factory _PageParams(
-      {required Map<String, String> pathParams,
-      required Uri uri}) = _$_PageParams;
+      {required final Map<String, String> pathParams,
+      required final Uri uri}) = _$_PageParams;
   _PageParams._() : super._();
 
   @override
@@ -160,28 +157,9 @@ abstract class _PageParams extends PageParams {
   Uri get uri;
   @override
   @JsonKey(ignore: true)
-  _$PageParamsCopyWith<_PageParams> get copyWith =>
+  _$$_PageParamsCopyWith<_$_PageParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$UriRouteTearOff {
-  const _$UriRouteTearOff();
-
-  _UriRoute call(
-      {required String path,
-      required PageBuilder pageBuilder,
-      RouteBuilder? routeBuilder}) {
-    return _UriRoute(
-      path: path,
-      pageBuilder: pageBuilder,
-      routeBuilder: routeBuilder,
-    );
-  }
-}
-
-/// @nodoc
-const $UriRoute = _$UriRouteTearOff();
 
 /// @nodoc
 mixin _$UriRoute {
@@ -197,74 +175,80 @@ mixin _$UriRoute {
 /// @nodoc
 abstract class $UriRouteCopyWith<$Res> {
   factory $UriRouteCopyWith(UriRoute value, $Res Function(UriRoute) then) =
-      _$UriRouteCopyWithImpl<$Res>;
+      _$UriRouteCopyWithImpl<$Res, UriRoute>;
+  @useResult
   $Res call({String path, PageBuilder pageBuilder, RouteBuilder? routeBuilder});
 }
 
 /// @nodoc
-class _$UriRouteCopyWithImpl<$Res> implements $UriRouteCopyWith<$Res> {
+class _$UriRouteCopyWithImpl<$Res, $Val extends UriRoute>
+    implements $UriRouteCopyWith<$Res> {
   _$UriRouteCopyWithImpl(this._value, this._then);
 
-  final UriRoute _value;
   // ignore: unused_field
-  final $Res Function(UriRoute) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? path = freezed,
-    Object? pageBuilder = freezed,
+    Object? path = null,
+    Object? pageBuilder = null,
     Object? routeBuilder = freezed,
   }) {
     return _then(_value.copyWith(
-      path: path == freezed
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      pageBuilder: pageBuilder == freezed
+      pageBuilder: null == pageBuilder
           ? _value.pageBuilder
           : pageBuilder // ignore: cast_nullable_to_non_nullable
               as PageBuilder,
-      routeBuilder: routeBuilder == freezed
+      routeBuilder: freezed == routeBuilder
           ? _value.routeBuilder
           : routeBuilder // ignore: cast_nullable_to_non_nullable
               as RouteBuilder?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$UriRouteCopyWith<$Res> implements $UriRouteCopyWith<$Res> {
-  factory _$UriRouteCopyWith(_UriRoute value, $Res Function(_UriRoute) then) =
-      __$UriRouteCopyWithImpl<$Res>;
+abstract class _$$_UriRouteCopyWith<$Res> implements $UriRouteCopyWith<$Res> {
+  factory _$$_UriRouteCopyWith(
+          _$_UriRoute value, $Res Function(_$_UriRoute) then) =
+      __$$_UriRouteCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String path, PageBuilder pageBuilder, RouteBuilder? routeBuilder});
 }
 
 /// @nodoc
-class __$UriRouteCopyWithImpl<$Res> extends _$UriRouteCopyWithImpl<$Res>
-    implements _$UriRouteCopyWith<$Res> {
-  __$UriRouteCopyWithImpl(_UriRoute _value, $Res Function(_UriRoute) _then)
-      : super(_value, (v) => _then(v as _UriRoute));
+class __$$_UriRouteCopyWithImpl<$Res>
+    extends _$UriRouteCopyWithImpl<$Res, _$_UriRoute>
+    implements _$$_UriRouteCopyWith<$Res> {
+  __$$_UriRouteCopyWithImpl(
+      _$_UriRoute _value, $Res Function(_$_UriRoute) _then)
+      : super(_value, _then);
 
-  @override
-  _UriRoute get _value => super._value as _UriRoute;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? path = freezed,
-    Object? pageBuilder = freezed,
+    Object? path = null,
+    Object? pageBuilder = null,
     Object? routeBuilder = freezed,
   }) {
-    return _then(_UriRoute(
-      path: path == freezed
+    return _then(_$_UriRoute(
+      path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
-      pageBuilder: pageBuilder == freezed
+      pageBuilder: null == pageBuilder
           ? _value.pageBuilder
           : pageBuilder // ignore: cast_nullable_to_non_nullable
               as PageBuilder,
-      routeBuilder: routeBuilder == freezed
+      routeBuilder: freezed == routeBuilder
           ? _value.routeBuilder
           : routeBuilder // ignore: cast_nullable_to_non_nullable
               as RouteBuilder?,
@@ -295,8 +279,8 @@ class _$_UriRoute extends _UriRoute {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UriRoute &&
-            const DeepCollectionEquality().equals(other.path, path) &&
+            other is _$_UriRoute &&
+            (identical(other.path, path) || other.path == path) &&
             (identical(other.pageBuilder, pageBuilder) ||
                 other.pageBuilder == pageBuilder) &&
             (identical(other.routeBuilder, routeBuilder) ||
@@ -304,20 +288,20 @@ class _$_UriRoute extends _UriRoute {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(path), pageBuilder, routeBuilder);
+  int get hashCode => Object.hash(runtimeType, path, pageBuilder, routeBuilder);
 
   @JsonKey(ignore: true)
   @override
-  _$UriRouteCopyWith<_UriRoute> get copyWith =>
-      __$UriRouteCopyWithImpl<_UriRoute>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_UriRouteCopyWith<_$_UriRoute> get copyWith =>
+      __$$_UriRouteCopyWithImpl<_$_UriRoute>(this, _$identity);
 }
 
 abstract class _UriRoute extends UriRoute {
   factory _UriRoute(
-      {required String path,
-      required PageBuilder pageBuilder,
-      RouteBuilder? routeBuilder}) = _$_UriRoute;
+      {required final String path,
+      required final PageBuilder pageBuilder,
+      final RouteBuilder? routeBuilder}) = _$_UriRoute;
   _UriRoute._() : super._();
 
   @override
@@ -328,6 +312,6 @@ abstract class _UriRoute extends UriRoute {
   RouteBuilder? get routeBuilder;
   @override
   @JsonKey(ignore: true)
-  _$UriRouteCopyWith<_UriRoute> get copyWith =>
+  _$$_UriRouteCopyWith<_$_UriRoute> get copyWith =>
       throw _privateConstructorUsedError;
 }

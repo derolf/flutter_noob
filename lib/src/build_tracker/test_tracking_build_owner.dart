@@ -10,9 +10,14 @@ class TrackingBuildOwnerAutomatedTestWidgetsFlutterBinding
     extends AutomatedTestWidgetsFlutterBinding
     with TrackingBuildOwnerWidgetsBindingMixin {
   static WidgetsBinding ensureInitialized() {
-    if (WidgetsBinding.instance == null) {
+    if (!_initialized) {
+      _initialized = true;
       TrackingBuildOwnerAutomatedTestWidgetsFlutterBinding();
     }
+    assert(WidgetsBinding.instance
+        is TrackingBuildOwnerAutomatedTestWidgetsFlutterBinding);
     return WidgetsBinding.instance;
   }
+
+  static var _initialized = false;
 }

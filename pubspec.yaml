@@ -1,6 +1,6 @@
 name: noob
 description: A few handy Flutter tools, dead simple `UriRouter` for `Uri`-based navigator or `BuildTracker`  to track widget rebuilds and what caused them to rebuild.
-version: 0.0.7
+version: 0.0.8
 homepage: https://github.com/derolf/flutter_debug_tools
 
 environment:
@@ -8,17 +8,18 @@ environment:
   flutter: ">=1.20.0"
 
 dependencies:
-  built_collection: ^5.0.0
+  built_collection: ^5.1.1
+  collection: ^1.17.0
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.18.2
+  flutter_hooks: ^0.18.5+1
   flutter_test:
     sdk: flutter
-  freezed_annotation: ^1.1.0
-  hooks_riverpod: ^1.0.3
-  stack_trace: ^1.0.0
+  freezed_annotation: ^2.2.0
+  hooks_riverpod: ^2.2.0
+  stack_trace: ^1.11.0
 
-dev_dependencies:
-  build_runner: ^2.0.0
-  freezed: ^1.1.1
-  lint: ^1.5.0
+dev_dependencies: 
+  build_runner: ^2.3.3
+  flutter_lints: ^2.0.1
+  freezed: ^2.3.2
